@@ -51,6 +51,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "SIGMA API", Version = "v1" });
+    options.EnableAnnotations();
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

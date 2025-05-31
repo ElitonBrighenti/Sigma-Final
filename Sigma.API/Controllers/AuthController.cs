@@ -4,6 +4,7 @@ using Sigma.Application.Dtos;
 using Sigma.Domain.Interfaces;
 using Sigma.Domain.Interfaces.Repositories;
 using Sigma.Infra.CrossCutting.Helpers;
+using Swashbuckle.AspNetCore.Annotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -24,6 +25,11 @@ namespace Sigma.API.Controllers
         }
 
         [HttpPost("login")]
+        [SwaggerOperation(
+        Summary = "Autentica um usuário",
+        Description = "Realiza o login com nome de usuário e senha, retornando um token JWT válido caso as credenciais estejam corretas.")]
+        [ProducesResponseType(typeof(object), 200)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> Login([FromBody] UserLoginDto login)
         {
             var passwordHash = HashHelper.GerarHashMD5(login.Password);
